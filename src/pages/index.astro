@@ -1,11 +1,16 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import Hero from '../components/Hero.astro';
+import Title from '../components/Title.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="IMPETUS INDOMITUS" description="A research group">
+	<main class="">
+		<Hero/>
+		<Title title="Title example"/>
+		<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+			<p class="text-lg text-center text-gray-900 dark:text-white">
+				Welcome to the IMPETUS INDOMITUS website. We are a research group focused on various scientific fields.
+			</p>
+	</main>
 </Layout>

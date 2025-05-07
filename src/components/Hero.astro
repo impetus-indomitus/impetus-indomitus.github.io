@@ -1,0 +1,76 @@
+---
+
+---
+<section class="relative w-full h-screen bg-black text-white overflow-hidden">
+   
+    <img
+      src="/group.webp"
+      alt="IMPETUS INDOMITUS"
+     
+      class="absolute inset-0 object-cover w-full h-lvh z-0"
+      />
+    
+      <!-- Overlay con z-index -->
+     
+      <div class="absolute inset-0 z-10 bg-gradient-to-b from-black via-transparent to-black"></div>
+
+    <!-- 
+    <div class="absolute top-4 left-4">
+      <img src="/logo-impetus.png" alt="Logo Impetus" class="h-12" />
+    </div>
+    
+    <div class="absolute top-4 left-24">
+      <img src="/logo-univalle.png" alt="Logo Universidad del Valle" class="h-12" />
+    </div>
+-->
+
+    <div class="relative z-10 flex flex-col items-center justify-end h-full pb-28 text-center">
+      <h2 class="text-lg  mb-2 font-semibold">Mission ends in</h2>
+      <div class="flex gap-6 text-white text-4xl font-bold countdown">
+        <div class="flex flex-col items-center">
+          <span id="years" class="text-5xl">00</span>
+          <span class="text-sm font-normal">years</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span id="days" class="text-5xl">00</span>
+          <span class="text-sm font-normal">days</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span id="hours" class="text-5xl">00</span>
+          <span class="text-sm font-normal">hours</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span id="minutes" class="text-5xl">00</span>
+          <span class="text-sm font-normal">minutes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <script>
+    
+    const countdown = () => {
+      const endDate = new Date("2029-12-31T23:59:59").getTime();
+      const now = new Date().getTime();
+      const distance = endDate - now;
+
+      const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365));
+      const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+      document.getElementById("years")!.innerHTML = years.toString();
+      document.getElementById("days")!.innerHTML = days.toString();
+      document.getElementById("hours")!.innerHTML = hours.toString();
+      document.getElementById("minutes")!.innerHTML = minutes.toString();
+
+      if (distance < 0) {
+        clearInterval(x);
+        document.querySelector(".countdown")!.innerHTML = "EXPIRED";
+      }
+    };
+
+    const x = setInterval(countdown, 1000);
+  </script>
+  
