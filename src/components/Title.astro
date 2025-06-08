@@ -2,12 +2,12 @@
 interface Props {
   title: string;
 }
-const { title } = Astro.props;
+const { title} = Astro.props;
 ---
 <div class="w-full bg-black border-b border-white py-4 h-16">
-  <div class="max-w-screen-xl mx-auto px-4 flex items-center justify-between h-full">
-    <h1 class="text-2xl font-semibold text-white">
+  <header class="max-w-screen-xl mx-auto px-4 flex items-center justify-between h-full">
+    <h1 class="text-xl font-semibold text-white container max-w-screen-xl ">
       {title}
     </h1>
-  </div>
+  </header>
 </div>

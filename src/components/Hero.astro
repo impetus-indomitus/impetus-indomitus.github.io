@@ -1,32 +1,19 @@
 ---
 
 ---
-<section class="relative w-full h-screen bg-black text-white overflow-hidden">
+<section class="relative w-full min-h-dvh bg-black text-white overflow-hidden">
    
     <img
       src="/group.webp"
       alt="IMPETUS INDOMITUS"
-     
       class="absolute inset-0 object-cover w-full h-lvh z-0"
       />
-    
-      <!-- Overlay con z-index -->
-     
       <div class="absolute inset-0 z-10 bg-gradient-to-b from-black via-transparent to-black"></div>
 
-    <!-- 
-    <div class="absolute top-4 left-4">
-      <img src="/logo-impetus.png" alt="Logo Impetus" class="h-12" />
-    </div>
-    
-    <div class="absolute top-4 left-24">
-      <img src="/logo-univalle.png" alt="Logo Universidad del Valle" class="h-12" />
-    </div>
--->
 
-    <div class="relative z-10 flex flex-col items-center justify-end h-full pb-28 text-center">
+    <div class="relative z-10 flex flex-col items-center justify-end h-full pb-28 text-center mx-auto">
       <h2 class="text-lg  mb-2 font-semibold">Mission ends in</h2>
-      <div class="flex gap-6 text-white text-4xl font-bold countdown">
+      <div class="flex gap-6 text-white text-4xl font-bold countdown mx-auto">
         <div class="flex flex-col items-center">
           <span id="years" class="text-5xl">00</span>
           <span class="text-sm font-normal">years</span>
@@ -42,6 +29,10 @@
         <div class="flex flex-col items-center">
           <span id="minutes" class="text-5xl">00</span>
           <span class="text-sm font-normal">minutes</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span id="seconds" class="text-5xl">00</span>
+          <span class="text-sm font-normal">seconds</span>
         </div>
       </div>
     </div>
@@ -59,11 +50,13 @@
       const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       document.getElementById("years")!.innerHTML = years.toString();
       document.getElementById("days")!.innerHTML = days.toString();
       document.getElementById("hours")!.innerHTML = hours.toString();
       document.getElementById("minutes")!.innerHTML = minutes.toString();
+      document.getElementById("seconds")!.innerHTML = seconds.toString();
 
       if (distance < 0) {
         clearInterval(x);

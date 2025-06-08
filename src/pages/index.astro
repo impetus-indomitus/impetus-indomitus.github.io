@@ -5,12 +5,99 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="IMPETUS INDOMITUS" description="A research group">
-	<main class="">
-		<Hero/>
-		<Title title="Title example"/>
-		<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-			<p class="text-lg text-center text-gray-900 dark:text-white">
-				Welcome to the IMPETUS INDOMITUS website. We are a research group focused on various scientific fields.
+	<Hero/>
+	<section class="container max-w-screen-xl  mx-auto px-4 py-16 bg-white  grid sm:grid-cols-1 md:grid-cols-2 items-center justify-center text-center gap-12">	
+			<div class="text-left min-w-1/2">
+				<div>
+					<h5 class="text-xl font-semibold mb-2">Our Mission</h5>
+					<p class="text-lg text-gray-400">
+						Serve our community by solving problems within our research topics with revolutionary approaches, when needed, in the energy conversion, propulsion, and transportation areas.
+					</p>
+				</div>
+
+				<div class="mt-4">
+					<h5 class="text-xl font-semibold mb-2">Our Vision</h5>
+					<p class="text-lg text-gray-400">
+						Become a Research School with theoretical and technological development in the energy conversion, propulsion, and transportation areas to serve our community.
+					</p>
+				</div>
+
+				<div class="mt-4">
+					<h5 class="text-xl font-semibold mb-2">Our Values</h5>
+					<ul class="text-lg text-gray-400">
+						<li>1. We exist to serve.</li>
+						<li>2. We research and solve problems to serve our community.</li>
+						<li>3. We work as a team showing respect and being humble.</li>
+					</ul>
+				</div>
+
+				<div class="mt-4">
+					<h5 class="text-xl font-semibold mb-2">Goals</h5>
+					<ul class="text-lg text-gray-400">
+						<li >1. Serve the community solving problems, based on our principles, through fundamental and applied research in each one of the research topics of our team Impetus Indomitus.</li>
+						<li >2. Encourage teamwork in our members following the research team principles.</li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="min-w-1/2 px-8">
+				<div class="bg-black rounded-lg px-8 py-4 flex flex-col items-center justify-center text-gray-200  ">
+					<h4 class="text-lg font-semibold">Director</h4>
+					<img src="https://placehold.co/200x300" alt="Director Guillermo Andrés Jaramillo Pizarro" class="h-40 my-8 hover:scale-110 transition-transform duration-200 rounded-lg">
+					<div>
+						<h5 class="text-lg font-semibold my-4">Guillermo Andrés Jaramillo Pizarro</h5>
+						<p class="text-sm">
+							Universidad del Valle - College of Engineering - School of Mechanical Engineering<br>
+							Associate Professor - Fluid mechanics lab coordinator - ASME - UNIVERSIDAD DEL VALLE Student Section Advisor
+						</p>
+						<br>
+						<p class="text-sm">
+							Calle 13#100-00 . Universidad del Valle - Campus Meléndez, building E33 - room 1009 . Cali. Colombia.<br>
+							Tel: +(57) 602-321-2100 Ext: 3765<br>
+							Email: <a href="mailto:guillermo.jaramillo@correounivalle.edu.co">guillermo.jaramillo@correounivalle.edu.co</a>
+						</p>
+					</div>
+
+				</div>
+			</div>
+	</section>
+	<div class="w-full bg-black border-b border-white py-4 h-1"></div>
+	<section class="container max-w-screen-xl  mx-auto px-4 py-20 text-center">
+			<h2 class="text-3xl font-bold mb-4">Join Our Research Group</h2>
+			<p class="text-lg text-gray-400 mb-8">Be part of a community dedicated to knowledge and discovery. Collaborate, innovate, and contribute to impactful research.</p>
+			<a href="/join" class="bg-black text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">Join Now</a>
+	</section>
+
+	<section>
+		<Title title="Research Topics" />
+		<div class="container max-w-screen-xl  mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+		<div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl  hover:scale-105 duration-200 transition-transform">
+			<h3 class="text-xl font-semibold mb-2 text-center">Thermofluid Mechanics, Electromagnetism and Optics</h3>
+			<img src="https://placehold.co/300x200" alt="Thermofluid Mechanics, Electromagnetism and Optics" class="w-full h-auto rounded-lg mt-4">
+		</div>
+		<div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl  hover:scale-105 duration-200 transition-transform">
+			<h3 class="text-xl font-semibold mb-2 text-center">Propulsion and energy Conversion Systems</h3>
+			<img src="https://placehold.co/300x200" alt="Propulsion and energy Conversion Systems" class="w-full h-auto rounded-lg mt-4">
+		</div>
+		<div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl  hover:scale-105 duration-200 transition-transform">
+			<h3 class="text-xl font-semibold mb-2 text-center">Hidronautics, Aeronautics and Astronautics</h3>
+			<img src="https://placehold.co/300x200" alt="Hidronautics, Aeronautics and Astronautics" class="w-full h-auto rounded-lg mt-4">
+		</div>
+	</div>
+	</section>
+	<div class="w-full bg-black border-b border-white py-4 h-1"></div>
+	<section class="container max-w-screen-xl  mx-auto px-4 py-16 bg-white  grid sm:grid-cols-1 md:grid-cols-2 items-center justify-center text-center gap-12">
+	
+		<div class="min-w-1/2 px-8">
+			<img src="https://placehold.co/400x300" alt="Research Image" class="w-full h-auto rounded-lg mb-4">
+		</div>
+		<div class="text-right min-w-1/2">
+			<h2 class="text-3xl font-bold mb-4">Explore our Knowledge</h2>
+			<p class="text-lg text-gray-400 mb-8">
+				Access our collection of documents and publications. Discover the advancements and studies from our research group.
 			</p>
-	</main>
+			<a href="/search" class="bg-black text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">Explore</a>
+		</div>
+	</section>
 </Layout>
