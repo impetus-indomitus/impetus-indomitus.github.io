@@ -1,0 +1,71 @@
+---
+import Title from '../components/Title.astro';
+import Layout from '../layouts/Layout.astro';
+
+
+const documents = [
+    {
+        name: "Research Paper on Quantum Computing",
+        description: "An in-depth analysis of quantum computing technologies and their applications.",
+        link: "/documents/quantum-computing.pdf"
+    },
+    {
+        name: "AI Ethics Guidelines",
+        description: "A comprehensive guide on ethical considerations in artificial intelligence development.",
+        link: "/documents/ai-ethics.pdf"
+    },
+    {
+        name: "Sustainable Energy Solutions",
+        description: "Exploring innovative solutions for sustainable energy production and consumption.",
+        link: "/documents/sustainable-energy.pdf"
+    },
+];
+
+---
+
+<Layout title="IMPETUS INDOMITUS - Documents" description="search for documents related to the IMPETUS INDOMITUS research group">
+    <main class="w-full">
+    <Title title="Documents" />
+
+    <!-- 
+    Hacer un buscador de documentos estaticos con javascript, que busque en un array de objetos que contenga el nombre del documento, la descripcion y el link al documento.
+    El buscador debe ser capaz de buscar por nombre y descripcion, y mostrar los resultados en una lista.
+   
+     -->
+    <section class="container mx-auto px-4 py-16 text-center">
+        <p class="text-xl max-w-3xl mx-auto mb-8">Search and browse our collection of research documents, publications, and studies. Use the search bar to quickly find what you need.</p>
+        <input type="text" id="searchInput" placeholder="Search documents..." class="w-full max-w-3xl p-2 border border-gray-300 rounded-lg mb-8" />
+       <div class="max-w-3xl mx-auto">
+           
+        </div>
+    </section>
+    </main>
+</Layout>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchInput");
+    const resultsList = document.getElementById("resultsList");
+
+    searchInput.addEventListener("input", function () {
+      const query = searchInput.value.toLowerCase();
+      resultsList.innerHTML = "";
+
+      const filteredDocuments = documents.filter(doc =>
+        doc.name.toLowerCase().includes(query) ||
+        doc.description.toLowerCase().includes(query)
+      );
+
+      filteredDocuments.forEach(doc => {
+        const listItem = document.createElement("li");
+        listItem.className = "mb-4";
+        listItem.innerHTML = `
+          <a href="${doc.link}" class="text-blue-500 hover:underline">${doc.name}</a>
+          <p class="text-gray-600">${doc.description}</p>
+        `;
+        resultsList.appendChild(listItem);
+      });
+    });
+  });
+</script>

@@ -1,0 +1,33 @@
+---
+interface Props {
+  categoryId: string;
+  name: string;
+  image: string;
+  cvlac: string;
+  orcid: string;
+}
+
+const {categoryId,  name, image, cvlac, orcid } = Astro.props;
+
+---
+
+
+<div class="w-64 h-[360px] relative overflow-hidden group rounded-lg shadow-lg item-profile" data-category={categoryId}>
+  <img
+    src={image}
+    alt={"Profile picture of " + name}
+    class="w-full h-80 object-cover grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out transform group-hover:-translate-y-4"
+  />
+  <div class="absolute bottom-0 left-0 w-full bg-white transition-all duration-500 ease-in-out transform translate-y-16 group-hover:translate-y-0">
+    <h6 class="p-4 text-2xs font-semibold text-gray-800 text-center">{name}</h6>
+    <div class="px-4 pb-2 text-sm text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center gap-2">
+        <a class="relative inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-gray-400 hover:scale-105 transition-transform duration-300 rounded-lg bg-white border border-gray-200 hover:bg-gray-100" href={cvlac} target="_blank" rel="noopener noreferrer">
+          CvLAC
+        </a>
+        <span class="mx-2">|</span>
+        <a class="relative inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-gray-400 hover:scale-105 transition-transform duration-300 rounded-lg bg-white border border-gray-200 hover:bg-gray-100" href={orcid} target="_blank" rel="noopener noreferrer">
+          ORCID
+        </a>
+    </div>
+  </div>
+</div>

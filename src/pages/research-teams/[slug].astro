@@ -1,0 +1,114 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Title from '../../components/Title.astro';
+import ItemProfile from '../../components/ItemProfile.astro';
+export async function getStaticPaths() {
+  const researchTeams = await getCollection('research-teams') as {
+    data: {
+      name: string;
+      logo: string;
+      description: string;
+      director: { name: string; image: string };
+      mission: string;
+      vision: string;
+      projects: { title: string; image: string; authors: string; url: string }[];
+      members: { name: string; image: string; cvlac: string; orcid: string }[];
+    };
+    slug: string;
+  }[];
+  return researchTeams.map(entry => (
+  {
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+const { entry } = Astro.props;
+
+const description = entry.data.description.length > 160
+  ? entry.data.description.slice(0, 157) + '....'
+  : entry.data.description;
+---
+
+<Layout title={`IMPETUS INDOMITUS - ${entry.data.name}`} description={entry.data.description}>
+
+    <header class="w-full px-4 py-16 bg-black text-white text-center gap-12">
+        <div class="flex justify-center items-center">
+            <img src={entry.data.logo} alt={`Picture of ${entry.data.name}`} class="w-32 h-32 object-contain" />
+            <h1 class="text-4xl font-bold ml-4">{entry.data.name}</h1>
+        </div>
+        <div class="max-w-4xl mx-auto mt-8 mb-12">
+            <p class="text-lg text-gray-400 mb-8">
+                {entry.data.description}
+            </p>
+             <div class="flex items-center mb-4 justify-center mt-8">
+                <div class="w-24 h-24 bg-gray-300 rounded-full overflow-hidden mr-4">
+                    <img src={entry.data.director.image} alt={`Picture of ${entry.data.director.name}`} class="w-full h-full object-cover" />
+                </div>
+              
+                <div class="text-left flex flex-col">
+                     <span class="text-lg font-semibold">{entry.data.director.name}</span>
+                      <span class="text-lg text-gray-400">Director</span>
+                </div>
+            </div>
+        </div>
+       
+        <section class="container mx-auto px-4 py-1 grid sm:grid-cols-1 md:grid-cols-2 items-start justify-center text-left gap-12" >
+         <div class="max-w-4xl mx-auto mt-8">
+            <h2 class="text-2xl font-bold mb-4">Mission</h2>
+            <p class="text-lg text-gray-400 mb-8">
+                {entry.data.mission}
+            </p>
+        </div>
+        <div class="max-w-4xl mx-auto mt-8">
+            <h2 class="text-2xl font-bold mb-4">Vision</h2>
+            <p class="text-lg text-gray-400 mb-8">
+                {entry.data.vision}
+            </p>
+        </div>
+        
+        </section> 
+         <div class="mt-8 ">
+          <a href="#members" class="inline-flex items-center justify-center p-2 text-base font-medium text-black rounded-lg bg-white hover:text-gray-900 hover:bg-gray-100">
+            <span class="w-full">Members</span>
+                <svg class="w-4 h-4 ms-2 rtl:rotate-270" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+    <section class="container max-w-screen-xl mx-auto px-4 py-16 bg-white my-12" id="projects">
+      <h2 class="text-xl font-semibold text-white bg-black py-4 px-48 w-fit mx-auto mb-16 text-center">Projects</h2>  
+        <div class="container  mx-auto px-4 py-1">
+            <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+                {entry.data.projects.map(project => (
+                    <div class="bg-white rounded-lg shadow-md p-6 flex flex-col hover:shadow-lg hover:scale-105 transition-transform duration-300 ">
+                        <h3 class="text-xl font-semibold mb-2">{project.title}</h3>
+                        <img src={project.image} alt={`Image project of ${project.title}`} class="w-full h-64 object-cover rounded-lg mb-4" />
+                        <p class="text-gray-500 mb-4">{description}</p>
+                        <span class="text-gray-400 mb-2 text-sm "><strong class="text-gray-600" >Authors:</strong> {project.authors}</span>
+                        <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline cursor-pointer">Read more</a>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+
+     <section class="container max-w-screen-xl mx-auto px-4 py-16 bg-white my-12" id="members">
+      <h2 class="text-xl font-semibold text-white bg-black py-4 px-48 w-fit mx-auto mb-16 text-center">Members</h2>  
+        <div class="container max-w-screen-xl mx-auto px-4 py-1">
+            <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+                {entry.data.members.map(member => (
+                    <ItemProfile
+                        categoryId={member.cvlac}
+                        name={member.name}
+                        image={member.image}
+                        cvlac={member.cvlac}
+                        orcid={member.orcid}
+                    />
+                ))}
+            </div>
+        </div>
+    </section>
+
+</Layout>
