@@ -4,13 +4,12 @@ logo: "https://placehold.co/256x160"
 director: 
   name: "Francisco Jose Obando Henk"
   image: "https://placehold.co/256x160"
-description: "A research team specialized in the complexities of airflow and fluid dynamics. Our mission is to push the boundaries of knowledge in engineering through rigorous research and practical experimentation."
+description: "A research team specialized in the complexities of airflow, and fluid dynamics. Our mission is to push the boundaries of knowledge in engineering, rigorous research and practical experimentation."
 mission: "Our mission as a Vortex research group is to advance the understanding of aerodynamic processes and problems, using research and innovation to develop effective and efficient solutions that address real-world challenges. Through collaboration, creativity and research excellence, we seek to transform the way aerodynamic issues are understood and addressed in different industries."
 vision: "Our vision as a Vortex research group is to be leaders in the research and development of innovative solutions in the field of aerodynamics, being recognized nationally and internationally for our excellence and quality in research and development. We seek to be a benchmark in the generation of knowledge and technology to address current and future challenges related to aerodynamic processes and problems, thus contributing to the advancement of the industry and society in general."
 topics:
     - "Propulsion and energy Conversion Systems"
-    - "Hidronautics"
-    - "Aeronautics and Astronautics"
+    - "Hidronautics, Aeronautics and Astronautics"
 members:
   - name: "Guillermo Andrés Jaramillo Pizarro"
     image: "https://placehold.co/256x160"
