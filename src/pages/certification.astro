@@ -1,0 +1,56 @@
+---
+import Title from '../components/Title.astro';
+import Layout from '../layouts/Layout.astro';
+import ItemCertifcation from '../components/ItemCertification.astro';
+---
+
+<Layout title="IMPETUS INDOMITUS - Certifications" description="certifications needed to be a member of the research group">
+    <Title title="Certifications" />
+
+
+    <header class="container mx-auto max-w-screen-xl px-4 py-16 bg-white grid sm:grid-cols-1 md:grid-cols-2 items-center justify-center text-center gap-12">
+         <div class="max-w-4xl mx-auto text-left">
+        <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Procedure to be Certified</h2>
+
+    <ol class="list-decimal pl-6 space-y-6 text-gray-400 text-lg">
+      <li>
+        <strong class="text-gray-500">Email</strong> any of the certifier members from the <strong class="text-gray-500">Vortex Team</strong> or <strong class="text-gray-500">Prof. Guillermo Jaramillo</strong> asking for certification in the respective equipment you want to work with.
+      </li>
+      <li>
+        Schedule with the chosen certifier a date to be certified.
+      </li>
+      <li>
+        The certifier member will make the respective reserve of the equipment for certification purposes
+      </li>
+      <li>
+        Once the certification is completed, the certifier will email <strong class="text-gray-500">Prof. Guillermo Jaramillo</strong> to report this data: 
+        <ul class="list-disc pl-6 mt-3 space-y-">
+          <li>Certified person name</li>
+          <li>UNIVALLE ID number of the certified person</li>
+          <li>Date of the certification</li>
+          <li>Equipment used in the certification</li>
+        </ul>
+      </li>
+      <li>
+        <strong class="text-gray-500">Prof. Guillermo Jaramillo</strong> will update the certification form with the data  given by the certifier about the certified person. This information will be public for traceability purposes. 
+      </li>
+    </ol>
+  </div>
+        <div class="min-w-1/2 px-8">
+            <img src="https://placehold.co/400x300" alt="Research Image" class="w-full h-auto rounded-lg mb-4">
+        </div>
+    </header>
+    <section class="container max-w-screen-xl mx-auto px-4 py-16 bg-white ">
+        <h2 class="text-2xl font-semibold text-white bg-black py-4 px-16 w-fit mx-auto mb-16 text-center">Equipment to Certify</h2>  
+        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8">
+
+            <ItemCertifcation title="FAN CHARACTERIZATION TUNNELS" description="A 3D Printer Certification demonstrates proficiency in operating, maintaining, and troubleshooting 3D printers. It covers design, materials, and printing techniques, validating skills in additive manufacturing for professionals and enthusiasts." image="https://placehold.co/200x150" />
+
+            <ItemCertifcation title="3D PRINTER" description="A 3D Printer Certification demonstrates proficiency in operating, maintaining, and troubleshooting 3D printers. It covers design, materials, and printing techniques, validating skills in additive manufacturing for professionals and enthusiasts." image="https://placehold.co/200x150" />
+
+            <ItemCertifcation title="WATER TUNNEL" description="A 3D Printer Certification demonstrates proficiency in operating, maintaining, and troubleshooting 3D printers. It covers design, materials, and printing techniques, validating skills in additive manufacturing for professionals and enthusiasts." image="https://placehold.co/200x150" />
+
+            <ItemCertifcation title="TOOLS" description="A 3D Printer Certification demonstrates proficiency in operating, maintaining, and troubleshooting 3D printers. It covers design, materials, and printing techniques, validating skills in additive manufacturing for professionals and enthusiasts." image="https://placehold.co/200x150" />
+        </div>
+    </section>
+</Layout>

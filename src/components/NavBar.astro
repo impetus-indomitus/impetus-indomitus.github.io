@@ -1,0 +1,151 @@
+---
+const currentPage = Astro.url.pathname;
+
+const mainMenu = [
+  { name: "Home", path: "/" },
+  {
+    name: "About Us",
+    path: "/about-us",
+    children: [{ name: "Members", path: "/about-us/members"}],
+  },
+  { name: "Research Teams", path: "/research-teams" },
+  { name: "Lab", path: "/lab" }
+];
+
+const isActive = (page: string) => {
+  if (page === "/") {
+    return currentPage === page
+      ? "block text-blue-700 font-semibold"
+      : "block text-white hover:text-blue-700";
+  } 
+
+  if (currentPage.includes(page)) {
+    return "block text-blue-700 font-semibold";
+  }
+    return "block text-white hover:text-blue-700";
+}
+
+---
+
+<header>
+  <nav class="bg-black">
+    <div
+      class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+    >
+    <div class="flex items-center justify-center gap-8">
+      <a href="https://www.univalle.edu.co/">
+        <img src="https://contratacion.univalle.edu.co/images/logo-footer.png" alt="Logo University" class="h-16 ">
+      </a>
+        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <img src="/logo.png" class="h-16" alt="IMPETUS INDOMITUS Logo" />
+      </a>
+
+    </div>
+    
+      <button
+        data-collapse-toggle="navbar-default"
+        type="button"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
+        aria-controls="navbar-default"
+        aria-expanded="false"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg
+          class="w-5 h-5"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 17 14"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M1 1h15M1 7h15M1 13h15"></path>
+        </svg>
+      </button>
+      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+        <ul
+          class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0"
+        >
+          {mainMenu.map((item) => (
+            <li>
+              {item.children ? (
+                <button
+                  id="dropdownNavbarLink"
+                  data-dropdown-toggle="dropdownNavbar"
+                  class={`flex items-center justify-between w-full py-2 px-3 rounded-sm md:border-0 md:p-0 md:w-auto text-white md:hover:text-blue-500 focus:text-white border-gray-700 hover:bg-gray-700 md:hover:bg-transparent ${isActive(item.path)}`}
+                >
+                  {item.name}
+                  <svg
+                    class="w-2.5 h-2.5 ms-2.5"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m1 1 4 4 4-4"></path>
+                  </svg>
+                </button>
+              ) : (
+                <a href={item.path} class={isActive(item.path)}>
+                  {item.name}
+                </a>
+              )}
+              {item.children && (
+                <div
+                  id="dropdownNavbar"
+                  class="absolute hidden z-100000 font-normal divide-y rounded-lg shadow-sm w-44 bg-white divide-gray-600"
+                >
+                  <ul
+                    class="py-2 text-sm"
+                    aria-labelledby="dropdownLargeButton"
+                  >
+                    {item.children.map((child) => (
+                      <li>
+                        <a
+                          href={child.path}
+                          class={currentPage == child.path ? "block px-4 py-2 text-blue-500" :  "block px-4 py-2 hover:text-blue-500" }
+                        >
+                          {child.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const dropdownBtn = document.getElementById("dropdownNavbarLink");
+    const dropdownMenu = document.getElementById("dropdownNavbar");
+
+    if (dropdownBtn === null || dropdownMenu === null) return;
+
+    dropdownBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      dropdownMenu.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", function (e) {
+      const target = e.target as Node;
+      if (!dropdownBtn.contains(target) && !dropdownMenu.contains(target)) {
+        dropdownMenu.classList.add("hidden");
+      }
+    });
+  });
+</script>

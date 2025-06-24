@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Title from '../../components/Title.astro';
+import Layout from '../../layouts/Layout.astro';
+import ItemResearchTeam from '../../components/ItemResearchTeam.astro';
+const teams = await getCollection('research-teams') as {
+    data: {
+        name: string;
+        logo: string;
+        topics: string[];
+        members: { name: string; image: string; cvlac: string; orcid: string }[];
+        projects: { title: string; description: string }[];
+    };
+    slug: string;
+}[];
+---
+
+<Layout title="IMPETUS INDOMITUS - " description="certifications needed to be a member of the research group" >
+    <Title title="Research Teams" />
+
+    <header class="container max-w-screen-xl mx-auto px-4 py-16 bg-white text-center gap-12">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-lg text-gray-400 mb-8">
+               Each team focuses on distinct areas of investigation, bringing forth their expertise to contribute to the overall mission of advancing knowledge and addressing complex challenges. 
+            </p>
+        </div>
+    </header>
+
+    <main class="container max-w-screen-xl mx-auto px-4 py-16 bg-white">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+            {teams.map(team => (
+                <ItemResearchTeam
+                    name={team.data.name}
+                    slug={`/research-teams/${team.slug}`}
+                    image={team.data.logo}
+                    topics={team.data.topics}
+                    members={team.data.members.length}
+                    projects={team.data.projects.length}
+                />
+            ))}
+        </div>
+            
+       
+    </main>
+
+</Layout>
