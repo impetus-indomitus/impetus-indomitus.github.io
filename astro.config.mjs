@@ -9,5 +9,4 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   site: 'https://impetus-indomitus.github.io',
-  base: '/website',
 });
