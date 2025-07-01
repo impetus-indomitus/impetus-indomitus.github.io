@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Title from '../../../components/Title.astro';
 import Layout from '../../../layouts/Layout.astro';
 import ItemProfile from '../../../components/ItemProfile.astro';
+
 const members = await getCollection('members') as {
     data: {
         title: string;
@@ -11,16 +12,19 @@ const members = await getCollection('members') as {
             image: string;
             cvlac: string;
             orcid: string;
+            year?: number;
         }[];
     };
 }[];
 const categoryMembers = members.map(member => member.data.title) as string[];
+const currentYear = new Date().getFullYear();
+const alumniYears = Array.from({ length: currentYear - 2021 + 1 }, (_, i) => currentYear - i);
 ---
 
 <Layout title="IMPETUS INDOMITUS - Members" description="Members of the research group">
     <Title title="Members" />
 
-    <header class="container max-w-screen-xl  mx-auto px-4 py-16 bg-white grid sm:grid-cols-1 md:grid-cols-2 items-center justify-center text-center gap-12">
+    <header class="container max-w-screen-xl mx-auto px-4 py-16 bg-white grid sm:grid-cols-1 md:grid-cols-2 items-center justify-center text-center gap-12">
         <div class="max-w-4xl mx-auto text-left">
             <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Team Members</h2>
             <p class="text-lg text-gray-400 mb-8">
@@ -29,16 +33,111 @@ const categoryMembers = members.map(member => member.data.title) as string[];
                 We work together to solve complex problems with innovative and revolutionary approaches emphasizing the importance of teamwork, valuing every contribution, and maintaining a spirit of humility as we strive to make a meaningful impact on society through our research and dedication.
             </p>
         </div>
-        <div class="min-w-1/2 px-8">
-            <img src="https://placehold.co/400x300" alt="Research Image" class="w-full h-auto rounded-lg mb-4">
+        <div class="min-w-1/2 px-8 flex flex-col justify-center items-center">
+            <img
+                id="carousel-image"
+                src="/images/about-us/members/IMG_0097.webp"
+                alt="Research Image"
+                class="w-[400px] h-[300px] object-cover rounded-lg mb-4 transition-all duration-500"
+                style="aspect-ratio: 4/3;"
+            >
+            <div class="flex gap-4 mt-2">
+                <button id="prev-btn" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 flex items-center justify-center" aria-label="Previous">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button id="pause-btn" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 flex items-center justify-center" aria-label="Pause">
+                    <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor"/>
+                        <rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor"/>
+                    </svg>
+                    <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <polygon points="5,3 19,12 5,21 5,3" fill="currentColor"/>
+                    </svg>
+                </button>
+                <button id="next-btn" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 flex items-center justify-center" aria-label="Next">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
         </div>
-    </header>
+        <script type="text/javascript">
+            const images = [
+                "/images/about-us/members/IMG_0097.webp",
+                "/images/about-us/members/IMG_0095.webp",
+                "/images/about-us/members/IMG_0090.webp",
+                "/images/about-us/members/IMG_0076.webp",
+                "/images/about-us/members/IMG_0070.webp",
+                "/images/about-us/members/IMG_0059.webp",
+                "/images/about-us/members/e.webp",
+                "/images/about-us/members/c.webp",
+                "/images/about-us/members/b.webp",
+                "/images/about-us/members/10.webp",
+                "/images/about-us/members/8.webp",
+                "/images/about-us/members/6.webp",
+                "/images/about-us/members/5.webp",
+                "/images/about-us/members/4.webp",
+                "/images/about-us/members/3.webp"
+            ];
+            let current = 0;
+            let intervalId = null;
+            const img = document.getElementById("carousel-image");
+            const pauseBtn = document.getElementById("pause-btn");
+            const prevBtn = document.getElementById("prev-btn");
+            const nextBtn = document.getElementById("next-btn");
+            const pauseIcon = document.getElementById("pause-icon");
+            const playIcon = document.getElementById("play-icon");
+            let paused = false;
 
+            function showImage(idx) {
+                img.src = images[idx];
+                img.style.width = "400px";
+                img.style.height = "300px";
+                img.style.objectFit = "cover";
+            }
+
+            function startCarousel() {
+                if (intervalId) clearInterval(intervalId);
+                intervalId = setInterval(() => {
+                    if (!paused) {
+                        current = (current + 1) % images.length;
+                        showImage(current);
+                    }
+                }, 2000);
+            }
+
+            pauseBtn.addEventListener("click", function () {
+                paused = !paused;
+                if (paused) {
+                    pauseIcon.classList.add("hidden");
+                    playIcon.classList.remove("hidden");
+                } else {
+                    pauseIcon.classList.remove("hidden");
+                    playIcon.classList.add("hidden");
+                }
+            });
+
+            prevBtn.addEventListener("click", function () {
+                current = (current - 1 + images.length) % images.length;
+                showImage(current);
+            });
+
+            nextBtn.addEventListener("click", function () {
+                current = (current + 1) % images.length;
+                showImage(current);
+            });
+
+            showImage(current);
+            startCarousel();
+        </script>
+    </header>
 
     <div class="w-full bg-black border-b border-white py-4">
         <div class="container max-w-screen-xl mx-auto px-4 flex justify-center items-center gap-16" id="buttons">
-            {categoryMembers.map(category=> (
-                <button class="bg-white text-black px-4 py-2 rounded-2xl hover:bg-gray-200 border-1 hover:border-white">
+            {categoryMembers.map(category => (
+                <button class="bg-white text-black px-4 py-2 rounded-2xl hover:bg-gray-200 border-1 hover:border-white" data-category={category}>
                     {category}
                 </button>
             ))}
@@ -46,48 +145,77 @@ const categoryMembers = members.map(member => member.data.title) as string[];
     </div>
 
     <section class="container max-w-screen-xl mx-auto my-4">
-        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8 members">
-            {members.map(membersCategory => (
-               membersCategory.data.members.map(member => (
-                    <ItemProfile
-                        categoryId={membersCategory.data.title}
-                        name={member.name}
-                        image={member.image}
-                        cvlac={member.cvlac}
-                        orcid={member.orcid}
-                    />
-                ))
-            ))}
-        </div>
+        {members.map(membersCategory => (
+            membersCategory.data.title === "Alumni" ? (
+                <div class="mb-12 category-section" data-category={membersCategory.data.title}>
+                    {alumniYears.map(year => {
+                        const yearMembers = membersCategory.data.members
+                            .filter(member => member.year === year)
+                            .sort((a, b) => a.name.localeCompare(b.name));
+                        return yearMembers.length > 0 ? (
+                            <div class="mb-8">
+                                <h3 class="text-xl font-semibold text-gray-700 mb-4 text-center">{year}</h3>
+                                <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8 members" data-category={membersCategory.data.title}>
+                                    {yearMembers.map(member => (
+                                        <ItemProfile
+                                            categoryId={membersCategory.data.title}
+                                            name={member.name}
+                                            image={member.image}
+                                            cvlac={member.cvlac}
+                                            orcid={member.orcid}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        ) : null;
+                    })}
+                </div>
+            ) : (
+                <div class="mb-12 category-section" data-category={membersCategory.data.title}>
+                    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8 members" data-category={membersCategory.data.title}>
+                        {membersCategory.data.members
+                            .slice()
+                            .sort((a, b) => a.name.localeCompare(b.name))
+                            .map(member => (
+                                <ItemProfile
+                                    categoryId={membersCategory.data.title}
+                                    name={member.name}
+                                    image={member.image}
+                                    cvlac={member.cvlac}
+                                    orcid={member.orcid}
+                                />
+                            ))}
+                    </div>
+                </div>
+            )
+        ))}
     </section>
 </Layout>
 
-
 <script>
-  
     document.addEventListener("DOMContentLoaded", function () {
-        const buttons = document.querySelectorAll("#buttons button") as NodeListOf<HTMLButtonElement>;
-        const members = document.querySelectorAll(".members > .item-profile");
-    
+        const buttons = document.querySelectorAll("#buttons button");
+        const categorySections = document.querySelectorAll(".category-section");
+
         buttons.forEach(button => {
-        button.addEventListener("click", function () {
-            const category = button.textContent?.trim() ?? "";
-           
-            buttons.forEach(btn => {
-                btn.classList.remove("bg-black", "text-white", "hover:text-white" , "hover:bg-black");
-                btn.classList.add("bg-white", "text-black", "border-white", "hover:bg-gray-200");
+            button.addEventListener("click", function () {
+                const category = button.dataset.category;
+                
+                buttons.forEach(btn => {
+                    btn.classList.remove("bg-black", "text-white", "hover:text-white", "hover:bg-black");
+                    btn.classList.add("bg-white", "text-black", "border-white", "hover:bg-gray-200");
+                });
+                button.classList.remove("bg-white", "text-black", "hover:bg-gray-200", "border-white");
+                button.classList.add("bg-black", "text-white", "hover:text-white", "hover:bg-black");
+
+                categorySections.forEach(section => {
+                    if (section.dataset.category === category) {
+                        section.classList.remove("hidden");
+                    } else {
+                        section.classList.add("hidden");
+                    }
+                });
             });
-            button.classList.remove("bg-white", "text-black", "hover:bg-gray-200", "border-white");
-            button.classList.add("bg-black", "text-white", "hover:text-white" , "hover:bg-black");
-    
-            members.forEach(member => {
-            if ((member as HTMLElement).dataset.category === category) {
-                member.classList.remove("hidden");
-            } else {
-                member.classList.add("hidden");
-            }
-            });
-        });
         });
 
         buttons[0].click();

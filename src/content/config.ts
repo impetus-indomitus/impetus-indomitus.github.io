@@ -43,6 +43,7 @@ const membersCollection = defineCollection({
         image: z.string(),
         cvlac: z.string().url(),
         orcid: z.string().url(),
+        year: z.number().optional()
       })
     ),
   }),
