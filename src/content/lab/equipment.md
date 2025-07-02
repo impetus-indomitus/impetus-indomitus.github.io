@@ -1,0 +1,12 @@
+---
+images:
+  - /images/lab/equipment/6-_1_.webp
+  - /images/lab/equipment/8.webp
+  - /images/lab/equipment/1 (1).webp
+  - /images/lab/equipment/2.webp
+  - /images/lab/equipment/3 (1).webp
+  - /images/lab/equipment/4 (1).webp
+  - /images/lab/equipment/5 (1).webp
+  - /images/lab/equipment/9.webp
+  - /images/lab/equipment/CARTA DE RECONOCIMIENTO LAB.webp
+---
