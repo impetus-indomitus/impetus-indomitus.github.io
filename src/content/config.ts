@@ -49,7 +49,15 @@ const membersCollection = defineCollection({
   }),
 });
 
+const announcements = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    images: z.array(z.string()),
+  }),
+});
+
 export const collections = {
   'research-teams': researchTeams,
   'members': membersCollection,
+  'announcements': announcements,
 };
