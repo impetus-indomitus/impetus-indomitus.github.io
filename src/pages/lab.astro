@@ -1,0 +1,99 @@
+---
+import Title from '../components/Title.astro';
+import Layout from '../layouts/Layout.astro';
+const SIGELAB_URL = 'https://sigelab.net/laboratorio/lUdIYTwxwCFUE2I5X0gu';
+
+const equipment = await Astro.glob('../content/lab/equipment.md');
+const equipmentImages = equipment[0]?.frontmatter?.images || [];
+---
+
+<Layout title="IMPETUS INDOMITUS - Laboratory" description="Explore advanced laboratory equipment at IMPETUS INDOMITUS, including high-tech tools and access details via the SIGELAB platform.">
+  <Title title="Laboratory" />
+  <div class="relative w-full min-h-[calc(100vh-60px)] overflow-hidden">
+    <img
+      src="/images/lab/PLAB.webp"
+      alt="Laboratory Background"
+      class="absolute inset-0 w-full h-full object-cover z-[1]"
+    />
+    <div class="relative flex h-full z-[2]">
+      <div class="flex-1 flex items-center justify-start pl-[3%]">
+        <img
+          src="/images/lab/LAB-RECONOCIDO.webp"
+          alt="Laboratory Equipment"
+          class="max-h-[30vh] max-w-[35%] rounded-xl shadow-lg sm:max-w-[80%] sm:max-h-[50vh]"
+        />
+      </div>
+      <div class="flex-1 flex items-center justify-end pr-[3%]">
+        <div class="bg-white/85 p-6 rounded-xl max-w-[90%]">
+          <p class="text-gray-800">
+            In this section, you will find detailed information about the laboratory equipment available for research, including a range of specialized and high-tech tools.
+            The use of any equipment belonging to the lab must follow the proper request procedure through the <b>SIGELAB</b> platform. Both the access guide and the platform link can be found at the bottom of this section.
+            <br /><br />
+            The laboratory also meets the minimum operational requirements established by the university's regulations, ensuring a safe and standardized environment for all users.
+            <br /><br />
+            Below you will find the corresponding subpages of the equipment and the <b>SIGELAB</b> access guide:
+            <br />
+            <a
+              href={SIGELAB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-bold text-blue-600 underline hover:text-blue-800"
+              aria-label="Access the SIGELAB platform for laboratory equipment management"
+            >
+              SIGELAB ACCESS
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de Enlaces -->
+  <section class="py-8 px-4 bg-gray-100">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-md flex items-center justify-center">
+          <a
+            href="/documents/lab/sigelab-manual.pdf"
+            download
+            class="text-2xl font-bold text-black hover:text-gray-800 underline"
+            aria-label="Download the SIGELAB manual PDF"
+          >
+            SIGELAB MANUAL
+          </a>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-md flex items-center justify-center">
+          <a
+            href="/certification"
+            class="text-2xl font-bold text-black hover:text-gray-800 underline"
+            aria-label="View laboratory certifications"
+          >
+            CERTIFICATIONS
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Imágenes de Equipos -->
+  <section id="equipment-section" class="py-12 px-4 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Fluids Mechanics Laboratory</h2>
+      {equipmentImages.length > 0 ? (
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {equipmentImages.map((image, index) => (
+            <div class="flex flex-col items-center">
+              <img
+                src={image}
+                alt={`Laboratory Equipment ${index + 1}`}
+                class="w-full h-48 object-cover rounded-lg shadow-md"
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p class="text-gray-600 text-center">No equipment images available.</p>
+      )}
+    </div>
+  </section>
+</Layout>
