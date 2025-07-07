@@ -6,119 +6,83 @@ const mainMenu = [
   {
     name: "About Us",
     path: "/about-us",
-    children: [{ name: "Members", path: "/about-us/members"}],
+    children: [
+      { name: "Members", path: "/about-us/members" },
+      { name: "Documents", path: "/search" },
+    ],
   },
   { name: "Research Teams", path: "/research-teams" },
-  { name: "Lab", path: "/lab" }
+  { name: "Lab", path: "/lab" },
 ];
 
 const isActive = (page: string) => {
   if (page === "/") {
     return currentPage === page
       ? "block text-blue-700 font-semibold"
-      : "block text-white hover:text-blue-700";
-  } 
-
-  if (currentPage.includes(page)) {
+      : "block text-white hover:text-blue-500";
+  }
+  if (currentPage.startsWith(page)) {
     return "block text-blue-700 font-semibold";
   }
-    return "block text-white hover:text-blue-700";
-}
-
+  return "block text-white hover:text-blue-500";
+};
 ---
 
 <header>
-  <nav class="bg-black">
-    <div
-      class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
-    >
-    <div class="flex items-center justify-center gap-8">
-      <a href="https://www.univalle.edu.co/">
-        <img src="https://contratacion.univalle.edu.co/images/logo-footer.png" alt="Logo University" class="h-16 ">
-      </a>
-        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="/logo.png" class="h-16" alt="IMPETUS INDOMITUS Logo" />
-      </a>
+  <nav class="bg-black text-white">
+    <div class="max-w-screen-xl mx-auto p-4 flex items-center justify-between flex-wrap">
+      <!-- Logos -->
+      <div class="flex items-center gap-4">
+        <a href="https://www.univalle.edu.co/">
+          <img src="https://contratacion.univalle.edu.co/images/logo-footer.png" alt="Logo University" class="h-12 sm:h-14" />
+        </a>
+        <a href="/">
+          <img src="/logo.png" alt="IMPETUS INDOMITUS Logo" class="h-12 sm:h-14" />
+        </a>
+      </div>
 
-    </div>
-    
-      <button
-        data-collapse-toggle="navbar-default"
-        type="button"
-        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
-        aria-controls="navbar-default"
-        aria-expanded="false"
-      >
-        <span class="sr-only">Open main menu</span>
-        <svg
-          class="w-5 h-5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 17 14"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M1 1h15M1 7h15M1 13h15"></path>
+      <!-- Botón hamburguesa -->
+      <button id="menu-toggle" type="button" class="md:hidden p-2 text-gray-300 hover:text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul
-          class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0"
-        >
-          {mainMenu.map((item) => (
-            <li>
+
+      <!-- Menú -->
+      <div id="main-menu" class="hidden w-full md:flex md:items-center md:space-x-6 md:w-auto mt-4 md:mt-0">
+        <ul class="flex flex-col md:flex-row gap-4 md:gap-6 w-full md:w-auto">
+          {mainMenu.map((item, index) => (
+            <li class="relative">
               {item.children ? (
-                <button
-                  id="dropdownNavbarLink"
-                  data-dropdown-toggle="dropdownNavbar"
-                  class={`flex items-center justify-between w-full py-2 px-3 rounded-sm md:border-0 md:p-0 md:w-auto text-white md:hover:text-blue-500 focus:text-white border-gray-700 hover:bg-gray-700 md:hover:bg-transparent ${isActive(item.path)}`}
-                >
-                  {item.name}
-                  <svg
-                    class="w-2.5 h-2.5 ms-2.5"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 10 6"
+                <>
+                  <button
+                    class={`flex items-center gap-1 ${isActive(item.path)} focus:outline-none`}
+                    data-dropdown-toggle={`dropdown-${index}`}
                   >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="m1 1 4 4 4-4"></path>
-                  </svg>
-                </button>
-              ) : (
-                <a href={item.path} class={isActive(item.path)}>
-                  {item.name}
-                </a>
-              )}
-              {item.children && (
-                <div
-                  id="dropdownNavbar"
-                  class="absolute hidden z-100000 font-normal divide-y rounded-lg shadow-sm w-44 bg-white divide-gray-600"
-                >
-                  <ul
-                    class="py-2 text-sm"
-                    aria-labelledby="dropdownLargeButton"
-                  >
+                    {item.name}
+                    <svg class="w-3 h-3 mt-[1px]" fill="none" stroke="currentColor" viewBox="0 0 10 6">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1l4 4 4-4" />
+                    </svg>
+                  </button>
+                  <ul id={`dropdown-${index}`}
+                    class="absolute hidden bg-white text-black rounded shadow-md mt-2 w-40 z-50">
                     {item.children.map((child) => (
                       <li>
-                        <a
-                          href={child.path}
-                          class={currentPage == child.path ? "block px-4 py-2 text-blue-500" :  "block px-4 py-2 hover:text-blue-500" }
-                        >
+                        <a href={child.path}
+                          class={`block px-4 py-2 hover:bg-gray-100 ${
+                            currentPage === child.path ? "text-blue-500 font-semibold" : ""
+                          }`}>
                           {child.name}
                         </a>
                       </li>
                     ))}
                   </ul>
-                </div>
+                </>
+              ) : (
+                <a href={item.path} class={isActive(item.path)}>
+                  {item.name}
+                </a>
               )}
             </li>
           ))}
@@ -126,26 +90,35 @@ const isActive = (page: string) => {
       </div>
     </div>
   </nav>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuToggle = document.getElementById("menu-toggle");
+      const mainMenu = document.getElementById("main-menu");
+
+      menuToggle.addEventListener("click", () => {
+        mainMenu.classList.toggle("hidden");
+      });
+
+      // Dropdowns
+      const dropdownButtons = document.querySelectorAll("[data-dropdown-toggle]");
+      dropdownButtons.forEach((btn) => {
+        const targetId = btn.getAttribute("data-dropdown-toggle");
+        const dropdown = document.getElementById(targetId);
+
+        if (!dropdown) return;
+
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          dropdown.classList.toggle("hidden");
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.classList.add("hidden");
+          }
+        });
+      });
+    });
+  </script>
 </header>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const dropdownBtn = document.getElementById("dropdownNavbarLink");
-    const dropdownMenu = document.getElementById("dropdownNavbar");
-
-    if (dropdownBtn === null || dropdownMenu === null) return;
-
-    dropdownBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      dropdownMenu.classList.toggle("hidden");
-    });
-
-    document.addEventListener("click", function (e) {
-      const target = e.target as Node;
-      if (!dropdownBtn.contains(target) && !dropdownMenu.contains(target)) {
-        dropdownMenu.classList.add("hidden");
-      }
-    });
-  });
-</script>

@@ -137,7 +137,7 @@ const alumniYears = Array.from({ length: currentYear - 2021 + 1 }, (_, i) => cur
 
     <div class="w-full bg-black border-b border-white py-4">
         <div class="container max-w-screen-xl mx-auto px-4 flex justify-center items-center gap-16" id="buttons">
-            {["Undergraduate", "Researchers", "Posgrad", "Alumni"].map(category => (
+            {["Undergraduate", "Posgrad", "Researchers", "Alumni"].map(category => (
                 <button class="bg-white text-black px-4 py-2 rounded-2xl hover:bg-gray-200 border-1 hover:border-white" data-category={category}>
                     {category}
                 </button>
@@ -146,50 +146,51 @@ const alumniYears = Array.from({ length: currentYear - 2021 + 1 }, (_, i) => cur
     </div>
 
     <section class="container max-w-screen-xl mx-auto my-4">
-        {members.map(membersCategory => (
-            membersCategory.data.title === "Alumni" ? (
-                <div class="mb-12 category-section" data-category={membersCategory.data.title}>
-                    {alumniYears.map(year => {
-                        const yearMembers = membersCategory.data.members
-                            .filter(member => member.year === year)
-                            .sort((a, b) => a.name.localeCompare(b.name));
-                        return yearMembers.length > 0 ? (
-                            <div class="mb-8">
-                                <h3 class="text-xl font-semibold text-gray-700 mb-4 text-center">{year}</h3>
-                                <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8 members" data-category={membersCategory.data.title}>
-                                    {yearMembers.map(member => (
-                                        <ItemProfile
-                                            categoryId={membersCategory.data.title}
-                                            name={member.name}
-                                            image={member.image}
-                                            cvlac={member.cvlac}
-                                            orcid={member.orcid}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        ) : null;
-                    })}
-                </div>
-            ) : (
-                <div class="mb-12 category-section" data-category={membersCategory.data.title}>
-                    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8 members" data-category={membersCategory.data.title}>
-                        {membersCategory.data.members
-                            .slice()
-                            .sort((a, b) => a.name.localeCompare(b.name))
-                            .map(member => (
-                                <ItemProfile
-                                    categoryId={membersCategory.data.title}
-                                    name={member.name}
-                                    image={member.image}
-                                    cvlac={member.cvlac}
-                                    orcid={member.orcid}
-                                />
-                            ))}
-                    </div>
-                </div>
-            )
-        ))}
+        {members.map((membersCategory, index) => (
+  membersCategory.data.title === "Alumni" ? (
+    <div class={`mb-12 category-section ${index === 0 ? '' : 'hidden'}`} data-category={membersCategory.data.title}>
+      {alumniYears.map(year => {
+        const yearMembers = membersCategory.data.members
+          .filter(member => member.year === year)
+          .sort((a, b) => a.name.localeCompare(b.name));
+        return yearMembers.length > 0 ? (
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4 text-center">{year}</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8 members" data-category={membersCategory.data.title}>
+              {yearMembers.map(member => (
+                <ItemProfile
+                  categoryId={membersCategory.data.title}
+                  name={member.name}
+                  image={member.image}
+                  cvlac={member.cvlac}
+                  orcid={member.orcid}
+                />
+              ))}
+            </div>
+          </div>
+        ) : null;
+      })}
+    </div>
+  ) : (
+    <div class={`mb-12 category-section ${index === 0 ? '' : 'hidden'}`} data-category={membersCategory.data.title}>
+      <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8 members" data-category={membersCategory.data.title}>
+        {membersCategory.data.members
+          .slice()
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map(member => (
+            <ItemProfile
+              categoryId={membersCategory.data.title}
+              name={member.name}
+              image={member.image}
+              cvlac={member.cvlac}
+              orcid={member.orcid}
+            />
+          ))}
+      </div>
+    </div>
+  )
+))}
+
     </section>
 </Layout>
 
