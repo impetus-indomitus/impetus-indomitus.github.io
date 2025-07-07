@@ -23,6 +23,6 @@ members:
 
   - name: "Guillermo Andrés Jaramillo Pizarro Ph.D"
     image: "/images/home/guillermo.webp"
-    cvlac: "https://cv-lac.org/ana-perez"
-    orcid: "https://orcid.org/0000-0002-2345-6789"
+    cvlac: "https://scienti.minciencias.gov.co/cvlac/visualizador/generarCurriculoCv.do?cod_rh=0000270032#"
+    orcid: "https://orcid.org/0000-0003-0727-9289"
 ---

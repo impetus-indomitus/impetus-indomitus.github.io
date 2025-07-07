@@ -1,71 +1,71 @@
 ---
 import Title from '../components/Title.astro';
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-
-const documents = [
-    {
-        name: "Research Paper on Quantum Computing",
-        description: "An in-depth analysis of quantum computing technologies and their applications.",
-        link: "/documents/quantum-computing.pdf"
-    },
-    {
-        name: "AI Ethics Guidelines",
-        description: "A comprehensive guide on ethical considerations in artificial intelligence development.",
-        link: "/documents/ai-ethics.pdf"
-    },
-    {
-        name: "Sustainable Energy Solutions",
-        description: "Exploring innovative solutions for sustainable energy production and consumption.",
-        link: "/documents/sustainable-energy.pdf"
-    },
-];
-
+const documentEntries = await getCollection('documents');
+const documents = documentEntries[0]?.data.documents || [];
 ---
 
-<Layout title="IMPETUS INDOMITUS - Documents" description="search for documents related to the IMPETUS INDOMITUS research group">
-    <main class="w-full">
-    <Title title="Documents" />
+<Layout title="IMPETUS INDOMITUS - Documents" description="Search for documents related to the IMPETUS INDOMITUS research group">
+  <main class="w-full">
+    <Title title="Documents"/>
 
-    <!-- 
-    Hacer un buscador de documentos estaticos con javascript, que busque en un array de objetos que contenga el nombre del documento, la descripcion y el link al documento.
-    El buscador debe ser capaz de buscar por nombre y descripcion, y mostrar los resultados en una lista.
-   
-     -->
     <section class="container mx-auto px-4 py-16 text-center">
-        <p class="text-xl max-w-3xl mx-auto mb-8">Search and browse our collection of research documents, publications, and studies. Use the search bar to quickly find what you need.</p>
-        <input type="text" id="searchInput" placeholder="Search documents..." class="w-full max-w-3xl p-2 border border-gray-300 rounded-lg mb-8" />
-       <div class="max-w-3xl mx-auto">
-           
-        </div>
+      <p class="text-xl max-w-3xl mx-auto mb-8">Search and browse our collection of research documents, publications, and studies. Use the search bar to quickly find what you need.</p>
+
+      <!-- Search bar -->
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search documents..."
+        class="w-full max-w-3xl p-2 border border-gray-300 rounded-lg mb-8"
+        oninput="filterDocuments()"
+      />
+
+      <!-- Results -->
+      <div class="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6" id="resultsList">
+        {documents.map((doc) => (
+  <div
+    class="bg-white rounded-lg shadow hover:shadow-md transition p-6 flex flex-col text-left gap-4 border border-gray-100"
+    data-name={doc.name}
+    data-description={doc.description}
+  >
+    <strong class="text-xl font-semibold text-gray-800">{doc.name}</strong>
+    <p class="text-gray-600">{doc.description}</p>
+
+    <a
+      href={doc.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      download
+      class="mt-auto inline-flex items-center text-sm text-rose-500 hover:text-rose-600 font-medium"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.828A2 2 0 0 0 19.414 8L16 4.586A2 2 0 0 0 14.828 4H6zm7 1.414L18.586 7H15a2 2 0 0 1-2-2V3.414zM6 4h7v3a4 4 0 0 0 4 4h3v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4zm2 8h8v2H8v-2zm0 4h5v2H8v-2z"/>
+      </svg>
+      Descargar PDF
+    </a>
+  </div>
+))}
+
+      </div>
     </section>
-    </main>
+    <script type="text/javascript" is:inline>
+      function filterDocuments() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase();
+        const cards = document.querySelectorAll('#resultsList > div');
+        for (let i = 0; i < cards.length; i++) {
+          const name = cards[i].dataset.name.toLowerCase();
+          const description = cards[i].dataset.description.toLowerCase();
+          if (name.includes(filter) || description.includes(filter)) {
+            cards[i].style.display = '';
+          } else {
+            cards[i].style.display = 'none';
+          }
+        }
+      }
+    </script>
+  </main>
 </Layout>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById("searchInput");
-    const resultsList = document.getElementById("resultsList");
-
-    searchInput.addEventListener("input", function () {
-      const query = searchInput.value.toLowerCase();
-      resultsList.innerHTML = "";
-
-      const filteredDocuments = documents.filter(doc =>
-        doc.name.toLowerCase().includes(query) ||
-        doc.description.toLowerCase().includes(query)
-      );
-
-      filteredDocuments.forEach(doc => {
-        const listItem = document.createElement("li");
-        listItem.className = "mb-4";
-        listItem.innerHTML = `
-          <a href="${doc.link}" class="text-blue-500 hover:underline">${doc.name}</a>
-          <p class="text-gray-600">${doc.description}</p>
-        `;
-        resultsList.appendChild(listItem);
-      });
-    });
-  });
-</script>
