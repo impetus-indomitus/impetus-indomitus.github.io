@@ -27,7 +27,7 @@ const alumniYears = Array.from({ length: currentYear - 2021 + 1 }, (_, i) => cur
     <header class="container max-w-screen-xl mx-auto px-4 py-16 bg-white grid sm:grid-cols-1 md:grid-cols-2 items-center justify-center text-center gap-12">
         <div class="max-w-4xl mx-auto text-left">
             <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Team Members</h2>
-            <p class="text-lg text-gray-400 mb-8">
+            <p class="text-lg text-gray-800 mb-8">
                 The Impetus Indomitus team members embody a philosophy rooted in collaboration, respect, and humility. Each member contributes unique expertise which is joined by a shared commitment to serve the community. 
                 <br><br>
                 We work together to solve complex problems with innovative and revolutionary approaches emphasizing the importance of teamwork, valuing every contribution, and maintaining a spirit of humility as we strive to make a meaningful impact on society through our research and dedication.
@@ -137,7 +137,7 @@ const alumniYears = Array.from({ length: currentYear - 2021 + 1 }, (_, i) => cur
 
     <div class="w-full bg-black border-b border-white py-4">
         <div class="container max-w-screen-xl mx-auto px-4 flex justify-center items-center gap-16" id="buttons">
-            {["Undergraduate", "Posgrad", "Researchers", "Alumni"].map(category => (
+            {["Undergraduate", "Graduate", "Researchers", "Alumni"].map(category => (
                 <button class="bg-white text-black px-4 py-2 rounded-2xl hover:bg-gray-200 border-1 hover:border-white" data-category={category}>
                     {category}
                 </button>
