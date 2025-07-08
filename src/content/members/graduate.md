@@ -1,5 +1,5 @@
 ---
-title: "Posgrad"
+title: "Graduate"
 members:
   - name: "Iván Dario Ruiz Hidalgo"
     image: "https://placehold.co/256x160"
