@@ -75,7 +75,7 @@ projects:
     - title: "Wind tunnel"
       description: "The creation of the wind tunnel by Impetus Indomitus arose from the need of our colleague, Iván Calvache, to have a testing platform for a small electric turbine, which was his graduation thesis project in Electrical Engineering. As a team, we designed and constructed a low-cost, modular subsonic wind tunnel to meet this need. Thanks to this effort, the Impetus Indomitus team now has the first wind tunnel in the School of Mechanical Engineering at the Universidad del Valle, which was entirely built by students. This tunnel has already been used for experimental measurements in four undergraduate projects and one master's thesis. The modular design of the tunnel allowed students to interchange the testing section according to their specific requirements."
       authors: "Alejandro Patiño, Iván Calvache, Santiago Ortega, Juan Cárdenas, Francisco Obando and Guillermo Andrés Jaramillo."
-      link: "/documents/lab/sigelab-manual.pdf"
+      link: "/example/documents.pdf"
       images:
         - "/images/research-team/vortex/projects/TUNEL PATI 1.webp"
         - "/images/research-team/vortex/projects/1 (2).webp"
