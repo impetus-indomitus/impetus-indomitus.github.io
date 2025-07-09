@@ -26,7 +26,7 @@ const researchTeams = defineCollection({
         description: z.string(),
         authors: z.string(),
         link: z.string(),
-        image: z.string(),
+        images: z.array(z.string()), 
       })
     ),
   }),
@@ -66,9 +66,16 @@ const documentsCollection = defineCollection({
   }),
 });
 
+const lab = defineCollection({
+  schema: z.object({
+    images: z.array(z.string()) 
+  })
+});
+
 export const collections = {
   'research-teams': researchTeams,
   'members': membersCollection,
   'announcements': announcements,
   'documents': documentsCollection,
+  'lab': lab,
 };
