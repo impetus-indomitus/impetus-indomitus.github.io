@@ -104,14 +104,17 @@ const { entry } = Astro.props;
     <h2 class="text-xl font-semibold text-white bg-black py-4 px-48 w-fit mx-auto mb-16 text-center">Members</h2>
     <div class="container max-w-screen-xl mx-auto px-4 py-1">
       <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
-        {entry.data.members.map(member => (
-          <ItemProfile
-            categoryId={member.cvlac}
-            name={member.name}
-            image={member.image}
-            cvlac={member.cvlac}
-            orcid={member.orcid}
-          />
+        {entry.data.members
+          .slice()
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map(member => (
+        <ItemProfile
+          categoryId={member.cvlac}
+          name={member.name}
+          image={member.image}
+          cvlac={member.cvlac}
+          orcid={member.orcid}
+        />
         ))}
       </div>
     </div>
