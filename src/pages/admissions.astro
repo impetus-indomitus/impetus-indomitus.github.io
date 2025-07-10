@@ -1,0 +1,52 @@
+---
+import Title from '../components/Title.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="IMPETUS INDOMITUS - Admissions" description="Join our research team">
+    <Title title="Admissions" />
+
+    <!-- HEADER CON EL FORMULARIO Y TEXTO -->
+    <header class="container mx-auto max-w-screen-xl px-4 py-16 grid sm:grid-cols-1 md:grid-cols-2 items-center gap-12">
+        
+        <!-- Left Panel -->
+        <div class="flex flex-col justify-center items-center bg-white p-10 rounded">
+            <p class="mb-6 text-lg text-black text-center">
+                To be part of the Impetus Indomitus research team, you must be certified in the handling of all the equipment used by the team and the Fluid Mechanics Laboratory, as well as complete the First Responder Course by IDIGER (certificate upload required). Once certified, you will be able to choose a project from our list or define one with Professor Guillermo Jaramillo. 
+                <br/><br/>
+                To apply, enter the data in the form and learn more about the certificates by clicking on the button below.
+            </p>
+
+            <a href="/certification">
+                <button class="bg-black text-white px-6 py-2 rounded-full border border-black hover:bg-white hover:text-black transition mt-6">
+                    Certifications
+                </button>
+            </a>
+        </div>
+
+        <!-- Right Panel (Form via Google Forms Redirect) -->
+        <div class="bg-black border border-white rounded-lg p-8 w-full">
+            <h2 class="text-2xl font-bold mb-6 text-white">REGISTER</h2>
+            <p class="mb-6 text-white">
+                Enter your contact information and we will contact you to let you know the steps to follow to join our team.
+                <br/><br/>
+                By continuing, you agree to the
+                <a href="https://www.univalle.edu.co/politica-de-tratamiento-de-la-informacion-personal" target="_blank" rel="noopener" class="underline text-blue-400">
+                Personal Data Protection Policy
+                </a>
+                of Universidad del Valle.
+            </p>
+
+            <a 
+                href="https://forms.gle/GcggALZE8tzqJfC56" 
+                target="_blank" 
+                rel="noopener"
+                class="inline-block"
+            >
+                <button class="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition">
+                Go to Registration Form
+                </button>
+            </a>
+    </div>
+    </header>
+</Layout>

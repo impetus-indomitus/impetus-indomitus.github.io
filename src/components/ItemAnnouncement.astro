@@ -1,0 +1,32 @@
+---
+const { images = [] } = Astro.props;
+---
+
+{images.length > 0 && (
+  <section class="w-full bg-black py-16 overflow-hidden">
+    <div class="max-w-screen-xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+      
+      <!-- Texto -->
+      <div class="w-full md:w-auto flex flex-col justify-center items-start">
+        <h2 class="text-white text-2xl font-semibold">Announcement</h2>
+        <div class="w-20 h-px bg-white mt-2"></div>
+      </div>
+
+      <!-- Carrusel -->
+      <div class="w-full overflow-x-auto no-scrollbar">
+        <div class="flex gap-6 snap-x snap-mandatory w-max">
+          {images.map((src, index) => (
+            <div class="flex-shrink-0 w-[320px] md:w-[360px] h-[320px] md:h-[360px] bg-white rounded-lg snap-start overflow-hidden flex items-center justify-center">
+              <img
+                src={src}
+                alt={`Announcement ${index + 1}`}
+                class="object-contain w-full h-full"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+)}

@@ -1,6 +1,5 @@
 import { defineCollection, z } from 'astro:content';
 
-
 const researchTeams = defineCollection({
   schema: z.object({
     name: z.string(),
@@ -26,13 +25,12 @@ const researchTeams = defineCollection({
         title: z.string(),
         description: z.string(),
         authors: z.string(),
-        link: z.string().url(),
-        image: z.string(),
+        link: z.string(),
+        images: z.array(z.string()), 
       })
-    )
+    ),
   }),
 });
-
 
 const membersCollection = defineCollection({
   schema: z.object({
@@ -43,12 +41,41 @@ const membersCollection = defineCollection({
         image: z.string(),
         cvlac: z.string().url(),
         orcid: z.string().url(),
+        year: z.number().optional(),
       })
     ),
   }),
 });
 
+const announcements = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    images: z.array(z.string()),
+  }),
+});
+
+const documentsCollection = defineCollection({
+  schema: z.object({
+    documents: z.array(
+      z.object({
+        name: z.string(),
+        description: z.string(),
+        link: z.string(),
+      })
+    ),
+  }),
+});
+
+const lab = defineCollection({
+  schema: z.object({
+    images: z.array(z.string()) 
+  })
+});
+
 export const collections = {
   'research-teams': researchTeams,
   'members': membersCollection,
+  'announcements': announcements,
+  'documents': documentsCollection,
+  'lab': lab,
 };

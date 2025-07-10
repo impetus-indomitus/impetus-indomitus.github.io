@@ -1,6 +1,5 @@
 import { defineCollection, z } from 'astro:content';
 
-
 const researchTeams = defineCollection({
   schema: z.object({
     name: z.string(),
